@@ -1,6 +1,7 @@
 const fs = require('fs');
 const PATH = 'server/data/';
 const uniqid = require('uniqid');
+const bcryptjs = require('bcryptjs');
 
 //* Exported utils
 
