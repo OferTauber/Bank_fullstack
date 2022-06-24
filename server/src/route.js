@@ -25,6 +25,7 @@ route.post('/new_user', async (req, res) => {
 
 //? headers: email, password
 route.get('/login', async (req, res) => {
+  console.log('Login!');
   try {
     const { email, password } = req.headers;
     const user = await User.findOne({ email });

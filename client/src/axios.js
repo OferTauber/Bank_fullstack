@@ -4,18 +4,14 @@ const URL =
     ? 'https://ofer-bank-app.herokuapp.com'
     : 'http://localhost:5000';
 
-const sendReqwest = async (type, route, params) => {
+export const login = async ({ email, password }) => {
   try {
-    return await axios({
-      method: type,
-      url: URL + route,
-      params: params.params,
-      data: params.json,
-      timeout: 3000,
+    const user = await axios.get(URL + '/login', {
+      headers: { email, password },
     });
-  } catch (err) {
-    console.warn(err);
+    return user.data;
+  } catch (e) {
+    // console.warn(e);
+    return e;
   }
 };
-
-export default sendReqwest;
