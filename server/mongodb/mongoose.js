@@ -1,10 +1,10 @@
-// const ATLSA_PASSWORD = require('../config/password');
-const ATLSA_PASSWORD = 'PmGIVGrFdekfgOtI';
+const PASSWORD = require('../config/password');
+// const PASSWORD = 'PmGIVGrFdekfgOtI';
 const mongoose = require('mongoose');
 
 mongoose
   .connect(
-    `mongodb+srv://ofer_bank:${ATLSA_PASSWORD}@ofer-bank.0lrwfds.mongodb.net/?retryWrites=true&w=majority`,
+    `mongodb+srv://ofer_bank:${PASSWORD}@ofer-bank.0lrwfds.mongodb.net/?retryWrites=true&w=majority`,
     {
       useNewUrlParser: true,
     }

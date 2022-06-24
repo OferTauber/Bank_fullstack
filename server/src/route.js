@@ -1,27 +1,9 @@
 const express = require('express');
 const route = express.Router();
-const utils = require('./utils');
-const path = require('path');
 const User = require('../mongodb/models/user_model');
 const bcryptjs = require('bcryptjs');
 const Account = require('../mongodb/models/account_model');
-const { Router } = require('express');
-
-// const foo = async () => {
-//   const a = 'abc';
-//   const b = await bcryptjs.hash(a, 8);
-//   const res = await bcryptjs.compare(a, b);
-//   console.log(res);
-//   setTimeout(async () => {
-//     const c = await bcryptjs.hash(a, 8);
-//     setTimeout(async () => {
-//       const res2 = await bcryptjs.compare(a, c);
-//       console.log(res2);
-//     }, 200);
-//   }, 300);
-// };
-
-// foo();
+// const { Router } = require('express');
 
 //? body: password, name, email
 route.post('/new_user', async (req, res) => {

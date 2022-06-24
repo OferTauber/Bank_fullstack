@@ -1,3 +1,3 @@
-const ATLSA_PASSWORD = require(process.env.PORT ? './index' : './dev.js');
+const PASSWORD = require(process.env.PORT ? './index' : './dev.js');
 
-module.exports = ATLSA_PASSWORD;
+module.exports = PASSWORD;
