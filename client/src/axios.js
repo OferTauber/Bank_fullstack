@@ -1,7 +1,7 @@
 import axios from 'axios';
 const URL =
   process.env.NODE_ENV === 'production'
-    ? 'https://ofer-bank-app.herokuapp.com'
+    ? 'https://ofer-bank-fullstack.herokuapp.com'
     : 'http://localhost:5000';
 
 export const login = async ({ email, password }) => {

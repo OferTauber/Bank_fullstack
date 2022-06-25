@@ -1,5 +1,4 @@
 const PASSWORD = require('../config/password');
-// const PASSWORD = 'PmGIVGrFdekfgOtI';
 const mongoose = require('mongoose');
 
 mongoose

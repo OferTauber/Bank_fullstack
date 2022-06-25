@@ -1,3 +1,3 @@
-const PASSWORD = require(process.env.PORT ? './index' : './dev.js');
+const PASSWORD = process.env.PORT ? process.env.PASSWORD : require('./dev.js');
 
 module.exports = PASSWORD;
