@@ -1,4 +1,5 @@
 import Form from './form';
+import Transfer from './transfer';
 import { form_transactions } from '../../axios';
 
 const Account = ({ account, reload }) => {
@@ -29,14 +30,12 @@ const Account = ({ account, reload }) => {
             Credit: $<span className="comp-font">{account.credit}</span>
           </p>
         </div>
-        <div className={`ui segment red`}>delete_accaount</div>
+        {/* <div className={`ui segment red`}>delete_accaount</div> */}
       </div>
 
       <Form color="blue" title="Deposit" transaction={onTransaction} />
       <Form color="teal" title="Withdraw" transaction={onTransaction} />
-
-      <Form color="brown" title="Credit" transaction={onTransaction} />
-      <div className={`ui segment orange`}>Transfer</div>
+      <Transfer transaction={form_transactions.Transfer} />
     </div>
   );
 };

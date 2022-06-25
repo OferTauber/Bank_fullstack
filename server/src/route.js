@@ -40,19 +40,21 @@ route.get('/login', async (req, res) => {
   }
 });
 
-//? headers: password, email
+//? headers: _id
 //? body: cash, credit
 route.post('/new_accaount', async (req, res) => {
   try {
-    const { email, password } = req.headers;
-    const user = await User.findOne({ email });
+    const { cash, credit } = req.body;
+    const { _id } = req.headers;
+    const user = await User.findOne({ _id });
     if (!user) return res.status(404).send();
 
-    const passwordIsCorect = await bcryptjs.compare(password, user.password);
-    if (!passwordIsCorect) throw new Error('No access');
-
-    const accaount = new Account({ ...req.body, owner: user._id });
-    user.accaounts.push(accaount._id);
+    const accaount = new Account({
+      cash: cash * 1,
+      credit: credit * 1,
+      owner: user._id,
+    });
+    user.accouts.push(accaount._id);
 
     await accaount.save();
     await user.save();
@@ -103,18 +105,13 @@ route.get('/accont/:account_id', async (req, res) => {
 route.patch('/withdraw', async (req, res) => {
   try {
     const { account_id, amount } = req.query;
-    const { password } = req.headers;
 
-    const accaount = await Account.findById({ _id: account_id });
+    const accaount = await Account.findOne({ _id: account_id });
     if (!accaount) return res.status(404).send();
-
-    const user = await User.findById({ _id: accaount.owner });
-    const passwordIsCorect = await bcryptjs.compare(password, user.password);
-    if (!passwordIsCorect) throw new Error('No access');
 
     accaount.cash = accaount.cash * 1 - amount * 1;
     if (accaount.cash + accaount.credit < 0)
-      throw new Error('Insufishent credit');
+      res.status(401).send('Insufishent credit');
 
     await accaount.save();
     res.send(accaount);
@@ -173,15 +170,10 @@ route.patch('/update_credit', async (req, res) => {
 route.patch('/transfer', async (req, res) => {
   try {
     const { account_id_from, account_id_to, amount } = req.query;
-    const { password } = req.headers;
 
     const accaountFrom = await Account.findById({ _id: account_id_from });
     const accaountTo = await Account.findById({ _id: account_id_to });
     if (!accaountFrom || !accaountTo) return res.status(404).send();
-
-    const user = await User.findById({ _id: accaountFrom.owner });
-    const passwordIsCorect = await bcryptjs.compare(password, user.password);
-    if (!passwordIsCorect) throw new Error('No access');
 
     accaountFrom.cash = accaountFrom.cash * 1 - amount * 1;
     if (accaountFrom.cash + accaountFrom.credit < 0)

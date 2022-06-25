@@ -12,6 +12,7 @@ const Login = ({ passUserToApp }) => {
   const [loginErrorMessage, setLoginErrorMessage] = useState('');
   const [signUpErrorMessage, setSignUpErrorMessage] = useState('');
 
+  void setSignUpErrorMessage;
   const onInputLoginChange = (event) => {
     onInputChange(event, loginDetails, setLoginDetails);
   };

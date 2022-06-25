@@ -3,7 +3,7 @@ import Account from './account';
 import { useEffect, useState } from 'react';
 import { getUserAccounts } from '../../axios';
 
-const User = ({ logedUser }) => {
+const User = ({ logedUser, logout }) => {
   const [userAccounts, setUserAccounts] = useState([]);
 
   const fetchUsersAccounts = async () => {
@@ -35,23 +35,17 @@ const User = ({ logedUser }) => {
       <div className="ui fixed inverted menu">
         <div className="ui container ofer-nav">
           <div className="header item">Welcome {logedUser.name}</div>
-          <div className=" header item btn">Log Out</div>
+          <div className=" header item btn" onClick={logout}>
+            Log Out
+          </div>
         </div>
       </div>
       <br />
       <br />
-      <NewAccount />
+      <NewAccount userId={logedUser._id} reload={fetchUsersAccounts} />
       {mapUserAccounts()}
     </div>
   );
 };
 
 export default User;
-
-// const account = {
-//   _id: '62b592b9069fcc0cf3dfcfbf',
-//   cash: 500,
-//   credit: 0,
-//   owner: '62b592b9069fcc0cf3dfcfbe',
-//   __v: 0,
-// };
