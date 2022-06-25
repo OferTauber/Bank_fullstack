@@ -67,14 +67,10 @@ route.post('/new_accaount', async (req, res) => {
 //? headers: password
 route.get('/all_acconts/:_id', async (req, res) => {
   const { _id } = req.params;
+
   try {
-    const { password } = req.headers;
     const user = await User.findById({ _id });
     if (!user) return res.status(404).send();
-
-    const passwordIsCorect = await bcryptjs.compare(password, user.password);
-    if (!passwordIsCorect) throw new Error('No access');
-
     const accaounts = await Account.find({ owner: user._id });
 
     res.send(accaounts);
@@ -128,7 +124,7 @@ route.patch('/withdraw', async (req, res) => {
 });
 
 //? quety: account_id, amount
-route.patch('/deposit', async (req, res) => {
+route.put('/deposit', async (req, res) => {
   try {
     const { account_id, amount } = req.query;
 

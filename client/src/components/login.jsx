@@ -32,7 +32,6 @@ const Login = ({ passUserToApp }) => {
 
   const onLogin = async (event) => {
     event.preventDefault();
-    console.log('Login!');
     setSpinner(true);
     try {
       const user = await login(loginDetails);
